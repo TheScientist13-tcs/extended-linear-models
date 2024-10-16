@@ -220,13 +220,13 @@ class NaturalCubicSplines(LinearRegression):
         return X_wrapped
 
     def _create_basis(self, xi):
-        return lambda x: np.max([0, x - xi]) ** 3
+        return lambda x: np.power(np.max([0, x - xi]), 3)
 
     def _cubic_spline_bases(self, knot_locs):
         h1 = lambda x: 1
         h2 = lambda x: x
-        h3 = lambda x: x**2
-        h4 = lambda x: x**3
+        h3 = lambda x: np.power(x, 2)
+        h4 = lambda x: np.power(x, 3)
         bases_funcs = [h1, h2, h3, h4]
         for i in range(len(knot_locs)):
             bases_funcs.append(self._create_basis(knot_locs[i]))
